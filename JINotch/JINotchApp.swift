@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import DynamicNotchKit
 import Cocoa
 import Combine
 
@@ -37,7 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
     var popover: NSPopover!
     var notchWindow: NotchHoverWindow?
-    let notch = DynamicNotch{NotchView()}
 
     private var cancellable: AnyCancellable?
     
@@ -53,21 +51,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let window = NotchHoverWindow(frame: notchFrame)
         window.orderFrontRegardless()
         
+        // MARK: パネルの中身を登録
+        //   ・本体(ノッチ真下) = バッテリー詳細
+        //   ・heading 左(ノッチ左脇) = 時計
+        //   ・heading 右(ノッチ右脇) = 今は未使用(必要になれば setHeadingContent(.trailing) で追加)
+        NotchAccessoryController.shared.configure(minWidth: 600, contentPadding: 24)
+        NotchAccessoryController.shared.setBottomContent {
+            NotchView()
+        }
+        NotchAccessoryController.shared.setHeadingContent(.trailing) {
+            SettingsIcon()
+        }
+
         if let hoverView = window.contentView as? NotchHoverView {
             hoverView.onHoverChanged = { hovering in
-                if hovering {
-                    Task{
-                        await self.notch.expand()
-                    }
-                    // ここでポップオーバーを開く、拡張UIを表示するなど
-                } else {
-                    Task{
-                        await self.notch.hide()
-                    }
-                }
+                // ホバー判定は controller が一本化(ノッチ→パネルへ移動しても閉じない)
+                NotchAccessoryController.shared.setHovering(hovering)
             }
         }
-        
+
         self.notchWindow = window
     }
     

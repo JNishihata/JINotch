@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		9A9C117B3015F7DC002BED79 /* DynamicNotchKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9A9C117A3015F7DC002BED79 /* DynamicNotchKit */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		9ADDF6053015E92B00F7936F /* JINotch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JINotch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -27,7 +23,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A9C117B3015F7DC002BED79 /* DynamicNotchKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +64,6 @@
 				9ADDF6073015E92B00F7936F /* JINotch */,
 			);
 			name = JINotch;
-			packageProductDependencies = (
-				9A9C117A3015F7DC002BED79 /* DynamicNotchKit */,
-			);
 			productName = JINotch;
 			productReference = 9ADDF6053015E92B00F7936F /* JINotch.app */;
 			productType = "com.apple.product-type.application";
@@ -100,9 +92,6 @@
 			);
 			mainGroup = 9ADDF5FC3015E92B00F7936F;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				9A9C11793015F7DC002BED79 /* XCRemoteSwiftPackageReference "DynamicNotchKit" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9ADDF6063015E92B00F7936F /* Products */;
 			projectDirPath = "";
@@ -346,25 +335,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9A9C11793015F7DC002BED79 /* XCRemoteSwiftPackageReference "DynamicNotchKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MrKai77/DynamicNotchKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9A9C117A3015F7DC002BED79 /* DynamicNotchKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A9C11793015F7DC002BED79 /* XCRemoteSwiftPackageReference "DynamicNotchKit" */;
-			productName = DynamicNotchKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9ADDF5FD3015E92B00F7936F /* Project object */;
 }

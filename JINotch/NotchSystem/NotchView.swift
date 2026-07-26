@@ -14,19 +14,15 @@ struct NotchView: View {
     
     var body: some View {
         VStack{
-            NotchHeading()
-            HStack(alignment: .top, spacing: 10) {
+            HStack(alignment: .top, spacing: 20) {
                 if !batteryModel.isloaded {
                     Text("Loading...")
                 }
                 CircularProgressBar(progress: CGFloat(batteryModel.batteryLevel))
-                    .frame(width: 80.0, height: 80.0)
-                    .padding(25.0)
                 VStack{
                     BatteryInfoView(
                         isPluggedIn: batteryModel.powerConnected,
                         isCharging: batteryModel.isCharging,
-                        
                         levelBattery: batteryModel.batteryLevel,
                         timeToFullCharge: batteryModel.timeRemaining,
                         lowPowerMode: batteryModel.isLowPowerMode
@@ -46,7 +42,7 @@ struct CircularProgressBar: View {
             // 背景の円
             Circle()
             // ボーダーラインを描画するように指定
-                .stroke(lineWidth: 12.0)
+                .stroke(lineWidth: 10.0)
                 .opacity(0.3)
                 .foregroundColor(.green)
             
@@ -56,7 +52,7 @@ struct CircularProgressBar: View {
             // 始点/終点には0.0-1.0の範囲に正規化した値を指定する
                 .trim(from: 0.0, to: progress * 0.01)
             // 線の端の形状などを指定
-                .stroke(style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+                .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                 .foregroundColor(.green)
             // デフォルトの原点は時計の12時の位置ではないので回転させる
                 .rotationEffect(Angle(degrees: 270.0))
@@ -124,9 +120,7 @@ struct BatteryInfoView: View {
                 }
                 
             }
-            .padding(.vertical, 8)
         }
-        .padding()
         .frame(width: 280)
         .foregroundColor(.white)
     }
