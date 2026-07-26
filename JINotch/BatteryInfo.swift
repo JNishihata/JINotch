@@ -19,14 +19,16 @@ final class BatteryMonitor: ObservableObject {
     @Published var batteryLevel: Int = 0
     @Published var isCharging: Bool = false
     @Published var isCharged: Bool = false
+    @Published var powerConnected: Bool = false
     @Published var isLowPowerModeEnabled: Bool = false
     @Published var powerSourceState : String = ""
     @Published var timeRemaining: Int = -1
     @Published var isloaded: Bool = false
+    @Published var isLowPowerMode: Bool = ProcessInfo.processInfo.isLowPowerModeEnabled
     
     private var runLoopSource: CFRunLoopSource?
     
-    private func updateBatteryInfo() {
+    func updateBatteryInfo() {
         guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
               let sources = IOPSCopyPowerSourcesList(snapshot)?.takeRetainedValue() as? [CFTypeRef] else {
             return
@@ -44,10 +46,29 @@ final class BatteryMonitor: ObservableObject {
             isCharging = description[kIOPSIsChargingKey] as? Bool ?? false
             isCharged = description[kIOPSIsChargedKey] as? Bool ?? false
             powerSourceState = description[kIOPSPowerSourceStateKey] as? String ?? ""
+            switch powerSourceState {
+            case "AC Power":
+                powerConnected = true
+            case "Battery Power":
+                powerConnected = false
+            default:
+                powerConnected = false
+            }
             timeRemaining = description[kIOPSTimeToEmptyKey] as? Int ?? -1
             if batteryLevel != 0 {
                 isloaded = true
             }
+        }
+        observeLowPowerMode()
+    }
+    
+    private func observeLowPowerMode() {
+        NotificationCenter.default.addObserver(
+            forName: .NSProcessInfoPowerStateDidChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.isLowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
         }
     }
     

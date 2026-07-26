@@ -33,6 +33,7 @@ struct JINotchApp: App {
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+    @ObservedObject var batteryModel = BatteryMonitor.shared
     var statusItem: NSStatusItem!
     var popover: NSPopover!
     var notchWindow: NotchHoverWindow?
@@ -41,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var cancellable: AnyCancellable?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        
+        batteryModel.updateBatteryInfo()
         // MARK: ノッチ判定用
         guard let screen = NSScreen.main,
               let notchFrame = getNotchFrame(for: screen) else {

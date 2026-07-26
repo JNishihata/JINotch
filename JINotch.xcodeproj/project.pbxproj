@@ -14,22 +14,9 @@
 		9ADDF6053015E92B00F7936F /* JINotch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JINotch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9A9C119B30160774002BED79 /* Exceptions for "JINotch" folder in "JINotch" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 9ADDF6043015E92B00F7936F /* JINotch */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9ADDF6073015E92B00F7936F /* JINotch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				9A9C119B30160774002BED79 /* Exceptions for "JINotch" folder in "JINotch" target */,
-			);
 			path = JINotch;
 			sourceTree = "<group>";
 		};
